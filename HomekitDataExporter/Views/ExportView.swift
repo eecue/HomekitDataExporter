@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ExportView: View {
     enum FocusedField:Hashable{
-            case bucket_input, org_input, token_input, url_input
+            case username_input, database_input, password_input, url_input
         }
     @FocusState var focus:FocusedField?
     
@@ -14,39 +14,39 @@ struct ExportView: View {
                 .font(.largeTitle)
             
             VStack(alignment: .leading) {
-                Text("Bucket").font(.title3)
+                Text("Username").font(.title3)
                 
                 TextField(
-                    "MyBucket",
-                    text: $settings.influxDBBucket
+                    "Username",
+                    text: $settings.influxDBUsername
                 )
-                .focused($focus, equals: .bucket_input)
+                .focused($focus, equals: .username_input)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .border(.secondary)
             }.padding(.top, 20)
             
             VStack(alignment: .leading) {
-                Text("Organisation").font(.title3)
+                Text("Database").font(.title3)
                 
                 TextField(
-                    "MyOrg",
-                    text: $settings.influxDBOrg
+                    "Database",
+                    text: $settings.influxDBDatabase
                 )
-                .focused($focus, equals: .org_input)
+                .focused($focus, equals: .database_input)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .border(.secondary)
             }.padding(.top, 20)
             
             VStack(alignment: .leading) {
-                Text("Token").font(.title3)
+                Text("Password").font(.title3)
                 
                 TextField(
-                    "[TOKEN]",
-                    text: $settings.influxDBToken
+                    "[PASSWORD]",
+                    text: $settings.influxDBPassword
                 )
-                .focused($focus, equals: .token_input)
+                .focused($focus, equals: .password_input)
                 .textInputAutocapitalization(.never)
                 .disableAutocorrection(true)
                 .border(.secondary)

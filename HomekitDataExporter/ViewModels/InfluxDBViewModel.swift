@@ -1,22 +1,22 @@
 import SwiftUI
 
 class InfluxDBViewModel: NSObject, ObservableObject {
-    private let bucketKey = "influxdb_bucket"
-    private let orgKey = "influxdb_org"
-    private let tokenKey = "influxdb_token"
+    private let username = "influxdb_username"
+    private let database = "influxdb_database"
+    private let password = "influxdb_password"
     private let urlKey = "influxdb_url"
     
-    @Published var influxDBBucket: String = ""
-    @Published var influxDBOrg: String = ""
-    @Published var influxDBToken: String = ""
+    @Published var influxDBUsername: String = ""
+    @Published var influxDBDatabase: String = ""
+    @Published var influxDBPassword: String = ""
     @Published var influxDBUrl: String = ""
     
     @Published var lastConnectionResult: String = ""
     
     var settingsComplete: Bool {
-        return !influxDBBucket.isEmpty
-            && !influxDBOrg.isEmpty
-            && !influxDBToken.isEmpty
+        return !influxDBUsername.isEmpty
+            && !influxDBDatabase.isEmpty
+            && !influxDBPassword.isEmpty
             && !influxDBUrl.isEmpty
     }
     
@@ -30,20 +30,20 @@ class InfluxDBViewModel: NSObject, ObservableObject {
         super.init()
         loadFromUserDefaults()
         if timer == nil {
-            timer = Timer.scheduledTimer(timeInterval: 60.0 * 5, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 60.0, target: self, selector: #selector(fireTimer), userInfo: nil, repeats: true)
         }
     }
 
     func loadFromUserDefaults() {
         let defaults = UserDefaults.standard
-        if let storedBucket = defaults.string(forKey: bucketKey) {
-            influxDBBucket = storedBucket
+        if let storedUsername = defaults.string(forKey: username) {
+            influxDBUsername = storedUsername
         }
-        if let storedOrg = defaults.string(forKey: orgKey) {
-            influxDBOrg = storedOrg
+        if let storedDatabase = defaults.string(forKey: database) {
+            influxDBDatabase = storedDatabase
         }
-        if let storedToken = defaults.string(forKey: tokenKey) {
-            influxDBToken = storedToken
+        if let storedPassword = defaults.string(forKey: password) {
+            influxDBPassword = storedPassword
         }
         if let storedUrl = defaults.string(forKey: urlKey) {
             influxDBUrl = storedUrl
@@ -52,9 +52,9 @@ class InfluxDBViewModel: NSObject, ObservableObject {
     
     func save() {
         let defaults = UserDefaults.standard
-        defaults.set(influxDBBucket, forKey: bucketKey)
-        defaults.set(influxDBOrg, forKey: orgKey)
-        defaults.set(influxDBToken, forKey: tokenKey)
+        defaults.set(influxDBUsername, forKey: username)
+        defaults.set(influxDBDatabase, forKey: database)
+        defaults.set(influxDBPassword, forKey: password)
         defaults.set(influxDBUrl, forKey: urlKey)
     }
     
@@ -70,7 +70,7 @@ class InfluxDBViewModel: NSObject, ObservableObject {
                 
                 let result: String
                 do {
-                    try await influxDBService.write(bucket: influxDBBucket, org: influxDBOrg, token: influxDBToken, url: influxDBUrl, data:accessoryData)
+                    try await influxDBService.write(username: influxDBUsername, database: influxDBDatabase, password: influxDBPassword, url: influxDBUrl, data:accessoryData)
                     result = "Successfully connected - " + Date().description
                 } catch {
                     result  = "Error writing to InfluxDB:\n\n\(error)"

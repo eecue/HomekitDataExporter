@@ -4,14 +4,17 @@ import InfluxDBSwift
 
 class InfluxDBService: NSObject, ObservableObject {
     
-    func write(bucket: String, org: String, token: String, url: String, data: [AccessoryData]) async throws {
+    func write(username: String, database: String, password: String, url: String, data: [AccessoryData]) async throws {
+        
+        
         //
-        // Initialize Client with default Bucket and Organization
+        // Initialize Client for v1.8
         //
         let client = InfluxDBClient(
             url: url,
-            token: token,
-            options: InfluxDBClient.InfluxDBOptions(bucket: bucket, org: org))
+            token: "\(username):\(password)",
+            options: InfluxDBClient.InfluxDBOptions(bucket: "\(database)", org: ""))
+        
         
         var points: [InfluxDBClient.Point] = []
         data.forEach { accessoryData in
@@ -25,8 +28,8 @@ class InfluxDBService: NSObject, ObservableObject {
         }
         
         try await client.makeWriteAPI().write(points: points)
-//        print("Written data:\n\n\(points.map { "\t- \($0)" }.joined(separator: "\n"))")
-//        print("\nSuccess!")
+            print("Written data:\n\n\(points.map { "\t- \($0)" }.joined(separator: "\n"))")
+            print("\nSuccess!")
         
         client.close()
     }

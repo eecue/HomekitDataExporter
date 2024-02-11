@@ -527,7 +527,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HomekitDataExporter/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H55U3AD7K;
+				DEVELOPMENT_TEAM = FBM6LY5KWH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHomeKitUsageDescription = "Access to request device properties ";
@@ -541,7 +541,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.pete.HomekitDataExporter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eecue.homekit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -560,7 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"HomekitDataExporter/Preview Content\"";
-				DEVELOPMENT_TEAM = 8H55U3AD7K;
+				DEVELOPMENT_TEAM = FBM6LY5KWH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHomeKitUsageDescription = "Access to request device properties ";
@@ -574,7 +574,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = uk.pete.HomekitDataExporter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eecue.homekit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
